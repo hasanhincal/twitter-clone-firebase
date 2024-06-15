@@ -22,3 +22,7 @@ Bu proje, aşağıdaki ana teknolojiler ve kütüphaneler kullanılarak gelişti
 - Kullanıcılar tweet oluşturabilir, düzenleyebilir like atabilir ve silebilir.
 - Gerçek zamanlı olarak tweet güncellemelerini görüntüleme.
 - Kullanıcı dostu arayüz tasarımı.
+
+## Yaınlanmış proje adresi;
+
+https://twitter-clone-firebase-alpha.vercel.app/
