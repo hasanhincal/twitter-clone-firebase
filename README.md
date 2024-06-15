@@ -23,6 +23,6 @@ Bu proje, aşağıdaki ana teknolojiler ve kütüphaneler kullanılarak gelişti
 - Gerçek zamanlı olarak tweet güncellemelerini görüntüleme.
 - Kullanıcı dostu arayüz tasarımı.
 
-## Yaınlanmış proje adresi;
+## Canlı proje
 
 https://twitter-clone-firebase-alpha.vercel.app/
