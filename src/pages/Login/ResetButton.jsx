@@ -1,7 +1,6 @@
 import { sendPasswordResetEmail } from "firebase/auth";
-import React from "react";
-import { auth } from "../firebase";
 import { toast } from "react-toastify";
+import { auth } from "../../firebase";
 
 const ResetButton = ({ email }) => {
   // şifre sıfırlama e-postası gönder;

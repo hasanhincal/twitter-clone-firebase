@@ -7,7 +7,7 @@ import {
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import ResetButton from "../../components/ResetButton";
+import ResetButton from "./ResetButton";
 
 const Login = () => {
   const [isSignUp, setIsSignUp] = useState(false);

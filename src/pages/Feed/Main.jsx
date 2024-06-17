@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import TweetForm from "../../components/TweetForm";
+import TweetForm from "../../components/Form";
 import { db } from "../../firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import Post from "../../components/Post";
+import Loader from "../../components/Loader";
 
 const Main = ({ user }) => {
   const [tweets, setTweets] = useState(null);
-  // kolleksiyonun referansını alma;
-  const tweetsCol = collection(db, "tweets");
 
   useEffect(() => {
+    // Abone olunacak kolleksiyonun referansını alma;
+    const tweetsCol = collection(db, "tweets");
+
     // filtreleme ayarlarını tanımlama;
     const queryOptions = query(tweetsCol, orderBy("createdAt", "desc"));
 
-    // koleksiyondaki değişimi izleme;
-    onSnapshot(queryOptions, (snapshot) => {
+    // koleksiyondaki değişimi anlık izleme(kolleksiyona abone olma);
+    const unsub = onSnapshot(queryOptions, (snapshot) => {
       // tweetleri geçici olarak tuttuğumuz dizi;
       const tempTweets = [];
 
@@ -23,14 +25,22 @@ const Main = ({ user }) => {
 
       setTweets(tempTweets);
     });
+    // Bileşen ekrandan giderse aboneliği durdurur.
+    return () => unsub();
   }, []);
 
   return (
-    <main className="border border-zinc-800 overflow-auto">
-      <header className="p-4 font-bold border border-zinc-800">Anasayfa</header>
-      <TweetForm />
+    <main className="border border-zinc-600 overflow-y-auto">
+      <header className="p-4 font-bold border-b border-zinc-600">
+        Anasayfa
+      </header>
+      <TweetForm user={user} />
       {/* loading */}
-      {!tweets && <p className="text-center mt-52">Yükleniyor...</p>}
+      {!tweets && (
+        <div className="flex justify-center mt-48 scale-[2]">
+          <Loader />
+        </div>
+      )}
       {/* atılan tweetlerin listelendiği alan */}
       <div>
         {tweets?.map((tweet) => (

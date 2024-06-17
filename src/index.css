@@ -6,27 +6,3 @@
   display: grid;
   grid-template-columns: 1fr minmax(400px, 600px) 1fr;
 }
-
-@media (max-width: 768px) {
-  .icon-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .nav-icon {
-    display: flex;
-    justify-content: center;
-    width: 50px;
-    font-size: 28px;
-  }
-  .nav-icon:hover {
-    background-color: gray;
-    border-radius: 50%;
-  }
-  .nav-title {
-    display: none;
-  }
-  .profil-inner {
-    margin: 0 auto;
-  }
-}

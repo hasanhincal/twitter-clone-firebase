@@ -18,7 +18,7 @@ const Feed = () => {
 
   return (
     <div className="bg-black ">
-      <div className="feed h-screen bg-black overflow-hidden text-white max-w-[922px] m-auto">
+      <div className="feed h-screen bg-black text-white m-auto">
         <Nav user={user} />
         <Main user={user} />
         <Aside />

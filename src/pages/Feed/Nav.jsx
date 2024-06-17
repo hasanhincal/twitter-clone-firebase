@@ -3,14 +3,15 @@ import { navSections } from "../../constant";
 import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 import dfPhoto from "../../../public/twitter-df-picture.png";
+import { BiSolidDoorOpen } from "react-icons/bi";
 
 const Nav = ({ user }) => {
   return (
-    <nav className="flex flex-col justify-between">
+    <nav className="flex flex-col justify-between items-end px-2 py-4">
       {/* navigasyon linkleri */}
-      <div className="icon-wrapper">
+      <div className="flex flex-col align-items-center">
         <img
-          className="w-12 m-auto my-2"
+          className="w-14 mb-4 md:ms-10"
           src="twitter-x-logo.png"
           alt="twitter-logo"
         />
@@ -18,34 +19,42 @@ const Nav = ({ user }) => {
         {navSections.map((i, key) => (
           <div
             key={key}
-            className="nav-icon flex items-center gap-3 text-lg cursor-pointer p-3 hover:bg-gray-900 transition"
+            className="flex items-center gap-3 text-2xl md:text-xl cursor-pointer p-3 rounded-lg hover:bg-[#505050b7] transition max-md:justify-center"
           >
-            {i.icon} <span className="nav-title">{i.title}</span>
+            {i.icon}
+            <span className="whitespace-nowrap max-md:hidden">{i.title}</span>
           </div>
         ))}
       </div>
       {/* kullanıcı bilgileri */}
-      <div className="flex flex-col gap-2 ">
-        <div className="flex flex-wrap items-center gap-2 p-2 ">
-          <img
-            className=" rounded-full w-14 profil-inner"
-            src={
-              auth?.currentUser?.photoURL ? auth.currentUser.photoURL : dfPhoto
-            }
-            alt="user-photo"
-          />
-
-          <div className="flex flex-col gap-2 profil-inner">
-            <span>{auth?.currentUser?.displayName}</span>
-            <span>@{auth?.currentUser?.displayName?.toLowerCase()}</span>
+      <div>
+        {!user ? (
+          <div className="flex flex-col md:items-center md:me-10 gap-5">
+            <img
+              className="rounded-full w-12 h-12 animate-bounce"
+              src={dfPhoto}
+              alt=""
+            />
           </div>
-        </div>
-        <button
-          onClick={() => signOut(auth)}
-          className="hover:bg-gray-900 mx-2 mb-4 px-3 py-2 rounded-lg transition w-32  whitespace-nowrap"
-        >
-          Çıkış Yap
-        </button>
+        ) : (
+          <div className="flex flex-col md:items-center md:me-10 gap-5">
+            <img
+              className="rounded-full max-w-[45px]"
+              src={user.photoURL ? user.photoURL : dfPhoto}
+              alt={user?.displayName}
+            />
+
+            <p className="max-md:hidden">{user?.displayName}</p>
+
+            <button
+              onClick={() => signOut(auth)}
+              className="bg-zinc-700 hover:bg-zinc-900  rounded flex justify-center gap-2 py-1 px-2  text-xl md:text-[15px] transition   whitespace-nowrap"
+            >
+              <BiSolidDoorOpen className="md:hidden" />
+              <span className="max-md:hidden">Çıkış Yap</span>
+            </button>
+          </div>
+        )}
       </div>
     </nav>
   );
