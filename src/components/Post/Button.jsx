@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiMessageRounded } from "react-icons/bi";
-import { FaRetweet } from "react-icons/fa";
+import { FaRetweet } from "react-icons/fa6";
+import { IoBookmarkOutline } from "react-icons/io5";
 import { FcLike } from "react-icons/fc";
-import { FiShare2 } from "react-icons/fi";
+import { RiShare2Line } from "react-icons/ri";
 import { auth, db } from "../../firebase";
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 
@@ -33,26 +34,29 @@ const Button = ({ tweet }) => {
     });
   };
   return (
-    <div className="flex justify-between items-center">
-      <div className="hover:bg-zinc-500 transition duration-[400ms] p-2 rounded-full cursor-pointer text-lg">
+    <div className="flex justify-between items-center text-gray-400">
+      <div className="hover:bg-[#1ea1de37] hover:text-[#60cdff] transition duration-[400ms] p-3 rounded-full cursor-pointer text-xl">
         <BiMessageRounded />
+      </div>
+      <div className="hover:bg-[#55c85737] hover:text-[#2aff3c] transition duration-[400ms] p-3 rounded-full cursor-pointer text-xl">
+        <FaRetweet />
       </div>
       <div
         onClick={toggleLike}
-        className="flex gap-1 items-center cursor-pointer"
+        className="flex gap-1 items-center cursor-pointer hover:text-[#ff2a91]"
       >
-        <p className=" hover:bg-zinc-500 transition duration-[400ms] p-2 rounded-full text-lg">
+        <p className="hover:bg-[#b84da148] transition duration-[400ms] p-3 rounded-full text-xl">
           {isLiked ? <FcLike /> : <AiOutlineHeart />}
         </p>
-        <span className="text-[11px] mt-1">
+        <span className="text-[14px] mt-1 ">
           {tweet?.likes.length > 0 && tweet?.likes.length}
         </span>
       </div>
-      <div className="hover:bg-zinc-500 transition duration-[400ms] p-2 rounded-full cursor-pointer text-lg">
-        <FaRetweet />
+      <div className="hover:bg-[#1ea1de37] hover:text-[#3bb0e7] transition duration-[400ms] p-3 rounded-full cursor-pointer text-xl">
+        <IoBookmarkOutline />
       </div>
-      <div className="hover:bg-zinc-500 transition duration-[400ms] p-2 rounded-full cursor-pointer text-lg">
-        <FiShare2 />
+      <div className="hover:bg-[#1ea1de37] hover:text-[#3bb0e7] transition duration-[400ms] p-3 rounded-full cursor-pointer text-xl">
+        <RiShare2Line />
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
 import { LuDot } from "react-icons/lu";
 import moment from "moment";
+import { MdEdit } from "react-icons/md";
 
 const UserInfo = ({ tweet }) => {
+  console.log(tweet);
   // firebase deki timeStamp değerini tarihe çevirdik
   const date = tweet.createdAt?.toDate();
 
@@ -18,6 +20,12 @@ const UserInfo = ({ tweet }) => {
         <LuDot className="text-[20px]" />
         {time_ago}
       </p>
+      {tweet.isEdited && (
+        <p className="text-gray-400 text-xs">
+          <span className="max-md:hidden">*düznlendi</span>
+          <MdEdit className="md:hidden" />
+        </p>
+      )}
     </div>
   );
 };

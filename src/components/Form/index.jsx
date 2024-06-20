@@ -1,6 +1,5 @@
 import { BsCardImage } from "react-icons/bs";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import dfPhoto from "../../../public/twitter-df-picture.png";
 import { toast } from "react-toastify";
 import { auth, db, storage } from "../../firebase";
@@ -85,7 +84,10 @@ const TweetForm = ({ user }) => {
           </label>
           <input className="hidden" type="file" name="" id="inp-file" />
 
-          <button className="bg-blue-600 hover:bg-blue-800 rounded-full px-4 py-2 transition flex justify-between items-center min-w-[85px] min-h-[40px] ">
+          <button
+            disabled={isLoading}
+            className="bg-blue-600 hover:bg-blue-800 rounded-full px-4 py-2 transition flex justify-between items-center min-w-[85px] min-h-[40px] "
+          >
             {isLoading ? <Loader /> : "Tweetle"}
           </button>
         </div>
