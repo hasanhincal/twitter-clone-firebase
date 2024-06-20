@@ -11,7 +11,7 @@ const Nav = ({ user }) => {
       {/* navigasyon linkleri */}
       <div className="flex flex-col align-items-center">
         <img
-          className="w-14 mb-4 md:ms-10"
+          className="w-14 mb-4 mx-1"
           src="twitter-x-logo.png"
           alt="twitter-logo"
         />
@@ -27,9 +27,9 @@ const Nav = ({ user }) => {
         ))}
       </div>
       {/* kullanıcı bilgileri */}
-      <div>
+      <div className="flex w-36 max-md:w-auto ">
         {!user ? (
-          <div className="flex flex-col md:items-center md:me-10 gap-5">
+          <div className="flex flex-col gap-5">
             <img
               className="rounded-full w-12 h-12 animate-bounce"
               src={dfPhoto}
@@ -37,7 +37,7 @@ const Nav = ({ user }) => {
             />
           </div>
         ) : (
-          <div className="flex flex-col md:items-center md:me-10 gap-5">
+          <div className="flex flex-col md:items-start gap-5">
             <img
               className="rounded-full max-w-[45px]"
               src={user.photoURL ? user.photoURL : dfPhoto}

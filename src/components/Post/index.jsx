@@ -37,7 +37,7 @@ const Post = ({ tweet }) => {
           {tweet.textContent && !isEditMode && <p>{tweet.textContent}</p>}
           {tweet.imageContent && !isEditMode && (
             <img
-              className="my-3 rounded-lg w-full max-h-[400] object-cover"
+              className="my-3 rounded-lg w-full max-h-[400px] object-cover"
               src={tweet.imageContent}
             />
           )}
