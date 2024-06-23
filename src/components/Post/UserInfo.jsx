@@ -3,7 +3,6 @@ import moment from "moment";
 import { MdEdit } from "react-icons/md";
 
 const UserInfo = ({ tweet }) => {
-  console.log(tweet);
   // firebase deki timeStamp değerini tarihe çevirdik
   const date = tweet.createdAt?.toDate();
 

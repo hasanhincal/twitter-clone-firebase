@@ -9,24 +9,17 @@ import { auth, db } from "../../firebase";
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 
 const Button = ({ tweet }) => {
-  const [isLiked, setIsLike] = useState(false);
-
-  // kullanıcının tweet'i beğenip beğenmediğini kontrol etme;
-  useEffect(() => {
-    const found = tweet?.likes.find(
-      (userId) => userId === auth.currentUser.uid
-    );
-    setIsLike(found);
-  }, [tweet]);
+  // oturumu acık olan kullanıcının tweet'i beğenip beğenmediğini kontrol etme;
+  const isLiked = tweet?.likes?.includes(auth.currentUser.uid);
 
   // like atma :tweet güncelleme;
   // kullanıcı like atmışsa kaldırırr
   // yoksa ekler
-  const toggleLike = () => {
+  const toggleLike = async () => {
     // güncellenecek tweet'in referansını alma;
     const tweetRef = doc(db, "tweets", tweet.id);
-
-    updateDoc(tweetRef, {
+    //referansı alınan tweet doc güncelle
+    await updateDoc(tweetRef, {
       // aktif kullanıcıyı tweet'in likes dizisine ekleme;
       likes: isLiked
         ? arrayRemove(auth.currentUser.uid)

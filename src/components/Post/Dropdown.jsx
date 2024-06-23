@@ -1,14 +1,18 @@
-import React, { useRef } from "react";
-import { BsThreeDotsVertical, BsTrashFill } from "react-icons/bs";
-import { auth, db } from "../../firebase";
+import React, { useRef, useState } from "react";
+import { BsTrashFill } from "react-icons/bs";
+import { db } from "../../firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { FcEditImage } from "react-icons/fc";
 import { MdEdit } from "react-icons/md";
+import Modal from "../Modal";
 
 const Dropdown = ({ tweet, setIsEditMode }) => {
-  const checkBox = useRef();
-  console.log(checkBox);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleEdit = () => {
+    setIsModalOpen(true);
+  };
+
   const handleDelete = () => {
     const answer = confirm("Twwet'i silmek istediğinize eminmisiniz?");
 
@@ -24,7 +28,7 @@ const Dropdown = ({ tweet, setIsEditMode }) => {
   return (
     <>
       <label className="popup">
-        <input ref={checkBox} type="checkbox" />
+        <input type="checkbox" />
 
         <div className="burger" tabIndex="0">
           <span></span>
@@ -33,17 +37,11 @@ const Dropdown = ({ tweet, setIsEditMode }) => {
         </div>
 
         <nav className="popup-window">
-          <legend>İşlemler</legend>
+          <legend>Hareketler</legend>
 
           <ul>
             <li className="hover:bg-green-500 transition duration-500">
-              <button
-                onClick={() => {
-                  checkBox.current.checked = false;
-                  // editmodu aktif yap;
-                  setIsEditMode(true);
-                }}
-              >
+              <button onClick={handleEdit}>
                 <MdEdit />
                 <span>Düzenle</span>
               </button>
@@ -60,6 +58,9 @@ const Dropdown = ({ tweet, setIsEditMode }) => {
           </ul>
         </nav>
       </label>
+      {isModalOpen && (
+        <Modal tweet={tweet} close={() => setIsModalOpen(false)} />
+      )}
     </>
   );
 };
