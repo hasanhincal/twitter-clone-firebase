@@ -48,9 +48,9 @@ const Nav = ({ user }) => {
 
             <button
               onClick={() => signOut(auth)}
-              className="bg-zinc-700 hover:bg-zinc-900  rounded flex justify-center gap-2 py-1 px-2  text-xl md:text-[15px] transition   whitespace-nowrap"
+              className="bg-zinc-700 hover:bg-zinc-900 items-center  rounded flex justify-center gap-2 py-1 px-2  text-xl md:text-[15px] transition   whitespace-nowrap"
             >
-              <BiSolidDoorOpen className="md:hidden" />
+              <BiSolidDoorOpen />
               <span className="max-md:hidden">Çıkış Yap</span>
             </button>
           </div>

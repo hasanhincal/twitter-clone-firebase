@@ -6,8 +6,6 @@ import { useState } from "react";
 import { auth } from "../../firebase";
 
 const Post = ({ tweet }) => {
-  // edit mode
-  const [isEditMode, setIsEditMode] = useState(false);
   return (
     <div className="flex gap-3 py-6 px-3 border-b border-b-zinc-600 ">
       <img
@@ -19,29 +17,10 @@ const Post = ({ tweet }) => {
         <div className="flex justify-between">
           <UserInfo tweet={tweet} />
           {/* tweet'i oturumu açık olan kullanıcı attıysa  göster yetkili olan silmesi için */}
-          {tweet.user.id === auth.currentUser.uid && (
-            <Dropdown tweet={tweet} setIsEditMode={setIsEditMode} />
-          )}
+          {tweet.user.id === auth.currentUser.uid && <Dropdown tweet={tweet} />}
         </div>
 
-        {isEditMode && (
-          <Content
-            tweet={tweet}
-            isEditMode={isEditMode}
-            close={() => {
-              setIsEditMode(false);
-            }}
-          />
-        )}
-        <div className="my-4">
-          {tweet.textContent && !isEditMode && <p>{tweet.textContent}</p>}
-          {tweet.imageContent && !isEditMode && (
-            <img
-              className="my-3 rounded-lg w-full max-h-[400px] object-cover"
-              src={tweet.imageContent}
-            />
-          )}
-        </div>
+        <Content tweet={tweet} />
 
         <Button tweet={tweet} />
       </div>

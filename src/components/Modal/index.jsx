@@ -12,11 +12,11 @@ const Modal = ({ tweet, close }) => {
   // form gönderilince
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+
     // inputlardaki verilere eriş
     const text = e.target[0].value;
     const file = e.target[1].files[0];
-
+    setIsLoading(true);
     // güncellenecek olan doc referansını al
     const tweetRef = doc(db, "tweets", tweet.id);
     try {
@@ -41,7 +41,7 @@ const Modal = ({ tweet, close }) => {
         imageContent: newUrl,
         isEdited: true,
       });
-      setIsLoading(false);
+
       // başarılı ise bildirim gönder
       toast.success("Tweet bilgileri güncellendi");
     } catch (error) {
@@ -49,12 +49,12 @@ const Modal = ({ tweet, close }) => {
       console.log(error);
       toast.error("Bir hata oluştu");
     }
-
+    setIsLoading(false);
     close();
   };
   return (
     <div className="fixed inset-0 w-full h-full grid place-items-center bg-gray-600 bg-opacity-30">
-      <div className="bg-black rounded-md py-10 px-8 w-full max-w-[600px] flex flex-col min-h-[60vh] max-h-[80vh]">
+      <div className="bg-black rounded-md py-10 px-8 w-full max-w-[600px] flex flex-col min-h-[60vh] max-h-[80vh] shadow-lg shadow-white">
         <div className="flex justify-between">
           <h1 className="text-xl font-bold">Tweet'i Düzenle</h1>
 
@@ -78,10 +78,15 @@ const Modal = ({ tweet, close }) => {
               type="text"
             />
             <label className="mt-10 mb-4">Fotoğraf Ekle/Değiştir</label>
-            <input type="file" name="file" />
+            <input
+              className="outline-none border rounded-md p-1 "
+              type="file"
+              name="file"
+            />
           </div>
           <div className="flex justify-end gap-5">
             <button
+              onClick={close}
               className="bg-gray-500 rounded-full py-2 px-4 hover:bg-gray-600"
               type="button"
             >
@@ -89,11 +94,7 @@ const Modal = ({ tweet, close }) => {
             </button>
             <button
               disabled={isLoading}
-              className={
-                isLoading
-                  ? "bg-blue-500 rounded-full py-2 px-7 hover:bg-blue-600 "
-                  : "bg-blue-500 rounded-full py-2 px-4 hover:bg-blue-600 "
-              }
+              className="bg-blue-500 rounded-full py-2 px-4 hover:bg-blue-600 min-w-[80px] flex justify-center items-center"
               type="submit"
             >
               {isLoading ? <Loader /> : "Kaydet"}

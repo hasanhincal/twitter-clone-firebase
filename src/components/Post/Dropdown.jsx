@@ -8,11 +8,21 @@ import Modal from "../Modal";
 
 const Dropdown = ({ tweet, setIsEditMode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const inputRef = useRef();
 
-  const handleEdit = () => {
-    setIsModalOpen(true);
+  // dropdown kapatma işlemi
+  const close = () => {
+    inputRef.current.checked = false;
   };
 
+  // güncelleme
+  const handleEdit = () => {
+    setIsModalOpen(true);
+    //dropdown kapat
+    close();
+  };
+
+  // silme
   const handleDelete = () => {
     const answer = confirm("Twwet'i silmek istediğinize eminmisiniz?");
 
@@ -23,14 +33,17 @@ const Dropdown = ({ tweet, setIsEditMode }) => {
       deleteDoc(ref)
         .then(() => toast.error("Tweet Silindi."))
         .catch((err) => toast.error("Tweet silinirken bir hata oluştu!"));
+
+      //dropdown kapat
+      close();
     }
   };
   return (
     <>
       <label className="popup">
-        <input type="checkbox" />
+        <input ref={inputRef} type="checkbox" />
 
-        <div className="burger" tabIndex="0">
+        <div className="burger">
           <span></span>
           <span></span>
           <span></span>
