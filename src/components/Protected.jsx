@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 
@@ -7,7 +7,7 @@ import { auth } from "../firebase";
 const Protected = () => {
   const [isAuth, setIsAuth] = useState();
 
-  useState(() => {
+  useEffect(() => {
     // kullanıcının oturumunu izler ve otorumda bir değişiklik olduğunda fonksiyonu tetikler.
     onAuthStateChanged(auth, (user) => {
       setIsAuth(user ? true : false);
